@@ -17,11 +17,11 @@ export function ThemeToggler() {
   }
 
   const handleThemeToggle = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
   }
 
-  const themeColor = resolvedTheme === 'dark' ? '#0F172A' : '#F5F3FF'
-  const capitalizedTheme = resolvedTheme === "dark" ? "Light" : "Dark";
+  const themeColor = resolvedTheme === 'light' ? '#F5F3FF' : '#0F172A'
+  const capitalizedTheme = resolvedTheme === "light" ? "Dark" : "Light";
 
   return (
     <HelmetProvider>

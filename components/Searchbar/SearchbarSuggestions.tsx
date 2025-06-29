@@ -1,4 +1,5 @@
 import { SubCategories } from 'types'
+import { ZH } from 'locales/i18n'
 
 interface SuggestionsProps {
   suggestions: SubCategories[]
@@ -17,7 +18,7 @@ export const SearchbarSuggestions: React.FC<SuggestionsProps> = ({
           className="px-4 py-2 cursor-pointer hover:bg-[rgba(0,0,0,0.2)] capitalize"
           onClick={() => onSuggestionClick(suggestion)}
         >
-          {suggestion.name}
+          {ZH(suggestion.name)}
         </li>
       ))}
     </ul>

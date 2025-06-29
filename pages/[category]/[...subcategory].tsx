@@ -21,7 +21,7 @@ interface Params extends ParsedUrlQuery, PageProps {}
 
 const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
   const { filterDB, pageCategory } = useFilterDB(subcategory[0])
-  const title = `LinksHub - ${
+  const title = `星渡斯特拉的以太之光 - ${
     pageCategory[0].toUpperCase() + pageCategory.slice(1)
   }`
 
@@ -50,22 +50,22 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
     <>
       <Head>
         <title>{title}</title>
-        <meta name="title" content="LinksHub" />
+        <meta name="title" content="星渡斯特拉的以太之光" />
         <meta
           name="description"
-          content="LinksHub is the ultimate hub of ready-to-use tech resources. Discover free tools and libraries to streamline your development process and build better projects."
+          content="星渡斯特拉的以太之光 - FF14固定队开荒实用链接中转站"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
+        {/* <meta
           name="keywords"
           content="LinksHub, developers, free resources, tools, software, libraries, frameworks, applications, websites"
-        />
-        <meta name="author" content="Rupali Haldiya" />
+        /> */}
+        {/* <meta name="author" content="Rupali Haldiya" /> */}
         <meta name="robots" content="index, follow" />
-        <meta name="revisit-after" content="7 days" />
+        {/* <meta name="revisit-after" content="7 days" /> */}
 
         {/* Open Graph */}
-        <meta property="og:url" content="https://linkshub.dev" />
+        {/* <meta property="og:url" content="https://linkshub.dev" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
@@ -79,10 +79,10 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
           property="og:image"
           content="https://res.cloudinary.com/dhnkuonev/image/upload/v1683805184/linkshub_gcahgs.png"
         />
-        <meta property="og:site_name" content="LinksHub" />
+        <meta property="og:site_name" content="LinksHub" /> */}
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
+        {/* <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://linkshub.dev" />
         <meta
           property="twitter:title"
@@ -105,7 +105,7 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
         <meta
           property="discord:invite"
           content="https://discord.com/invite/NvK67YnJX5"
-        />
+        /> */}
       </Head>
       <TopBar />
       <ReportBug />

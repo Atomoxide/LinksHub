@@ -13,7 +13,7 @@ const BreadCrumbs: React.FC<ComponentProps> = ({ sections }) => {
           className="flex gap-x-2 dark:bg-theme-tertiary/50 border border-theme-secondary/25 bg-theme-primary-light/20 dark:border dark:border-theme-primary/8 text-text-primary-light dark:text-text-quaternary text-lg py-0.5 px-2.5 rounded-lg cursor-pointer"
         >
           <Icons.Home className="h-4 w-4 m-auto text-text-primary-light dark:text-text-quaternary" />
-          <div>Home</div>
+          <div>首页</div>
         </Link>
         <div className="text-2xl mx-2.5 font-semibold text-text-secondary-light">
           /

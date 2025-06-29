@@ -6,6 +6,7 @@ import { isValidResource, regEx } from './utils'
 import Link from 'next/link'
 import CardTooltip from 'components/CardTooltip/CardTooltip'
 import { Icons } from 'components/icons'
+import { ZH } from 'locales/i18n'
 
 interface TopBarProps {
   className?: string
@@ -50,21 +51,22 @@ export const TopBar: FC<TopBarProps> = ({}) => {
         className="gap-x-2 items-center border border-theme-secondary/25 bg-theme-primary-light/20 bg-opacity-20 dark:bg-theme-tertiary/50 dark:border dark:border-theme-primary/8 px-[10px] py-[6px] rounded-md cursor-pointer hidden md:flex"
       >
         <Icons.Home className="h-4 w-4 m-auto text-text-primary-light dark:text-text-quaternary" />
-        <h3>Home</h3>
+        <h3>首页</h3>
       </Link>
       <Icons.rxSlash className="hidden md:inline-block" />
       <Link
         href={'/' + categoryNameLink}
         className="bg-theme-primary-light/20 border border-theme-secondary/25 dark:bg-theme-tertiary/50 dark:border dark:border-theme-primary/8 px-[10px] py-[6px] rounded-md cursor-pointer hidden md:inline-block"
       >
-        <h3>{capitalizeEachWord(categoryName)}</h3>
+        <h3>{ZH(categoryName)}</h3>
       </Link>
       <Icons.rxSlash className="hidden md:inline-block" />
       <Link href={'/' + categoryNameLink} className="flex gap-x-2 items-center">
         <Icons.arrowBack className="md:hidden" />
       </Link>
       <div className="md:bg-theme-primary-light/20 border border-theme-secondary/25 dark:bg-theme-tertiary/50 dark:border dark:border-theme-primary/8 px-[10px] py-[6px] text-xl md:text-base rounded-md truncate ...">
-        <h3>{capitalizeEachWord(cleanedCategory)}</h3>
+        {/* <h3>{ZH(capitalizeEachWord(cleanedCategory))}</h3> */}
+        <h3>{ZH(subcategoryName)}</h3>
       </div>
       <button>
         <Icons.infoCircle

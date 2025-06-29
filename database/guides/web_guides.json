@@ -1,0 +1,16 @@
+[
+  {
+    "name": "XIVSTRAT",
+    "description": "国服中文攻略网站，提供图文攻略和站位小抄",
+    "url": "https://xivstrat.com/",
+    "category": "guide",
+    "subcategory": "web_guide"
+  },
+  {
+    "name": "WTFDIG",
+    "description": "国际服所有常见攻略打法的图文和站位汇总",
+    "url": "https://wtfdig.info/",
+    "category": "guide",
+    "subcategory": "web_guide"
+  }
+]

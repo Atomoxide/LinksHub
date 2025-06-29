@@ -16,7 +16,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
   const { name, description, url, subcategory } = data
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const [isOverflow, setIsOverflow] = useState(false)
-  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|bilibili\.com|bilivideo\.com)\/.+$/
 
   useEffect(() => {
     if (descriptionRef.current) {
@@ -37,9 +37,9 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
           >
             {name}
           </h2>
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <Bookmark />
-          </div>
+          </div> */}
         </header>
         <div className="h-[7rem]">
           <div
@@ -50,7 +50,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
           </div>
           {isOverflow && (
             <span onClick={onClick} className="text-sm float-right hover:underline dark:hover:text-theme-primary text-right hover:text-theme-primary dark:text-text-primary">
-              ...Read More
+              ...查看更多
             </span>
           )}
         </div>
@@ -65,7 +65,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
               'mt-2 flex w-full items-center justify-center gap-2 rounded-lg  bg-theme-secondary px-3 py-2 text-center text-light-primary duration-100'
             }
           >
-            <span className='truncate ...'>Visit site</span>
+            <span className='truncate ...'>前往网页</span>
             {youtubeRegex.test(url) ? (
               <BsYoutube size="1.3em" />
             ) : subcategory === 'e_book' ? (

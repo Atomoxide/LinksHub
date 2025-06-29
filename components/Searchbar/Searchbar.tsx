@@ -15,6 +15,7 @@ import { SubCategories, subcategoryArray } from '../../types'
 import { SearchbarAction } from './SearchbarReducer'
 import { sidebarData } from 'database/data'
 import { searchOptions as importedSearchOptions } from 'database/data'
+import { ZH } from 'locales/i18n'
 
 interface SearchbarProps {
   dispatchSearch: (action: SearchbarAction) => void

@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalContext'
 import { SubCategories } from '../../types'
 import { usePagination } from '../../hooks/usePagination'
+import { ZH } from 'locales/i18n'
 
 export const SideNavbarElement: FC<{
   category: string
@@ -34,7 +35,7 @@ export const SideNavbarElement: FC<{
         className="ml-2 py-2 text-base font-medium font-sans capitalize transition-all duration-300 hover:pl-2 dark:border-theme-secondary"
         onClick={closeNav}
       >
-        {name}
+        {ZH(name)}
       </div>
     </Link>
   )

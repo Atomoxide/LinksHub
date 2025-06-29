@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Spinner } from './Spinner'
+import MoogleLoader from './moogle_loader'
 
 const LOADER_TIMEOUT = 2000
 
@@ -32,7 +33,8 @@ export const Preloader = ({
         <div
           className={`loader ${backgroundColor} fixed z-30 top-0 left-0 w-full h-screen flex justify-center items-center`}
         >
-          <Spinner {...spinnerProps} />
+          {/* <Spinner {...spinnerProps} /> */}
+          <MoogleLoader />
         </div>
       )}
     </>

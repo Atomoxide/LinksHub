@@ -11,6 +11,8 @@ import type { ISidebar } from '../../types'
 
 import { Icons } from 'components/icons'
 
+import { ZH } from 'locales/i18n'
+
 const categoriesToUppercase = ['ai']
 const exceptions: Record<string, string> = {
   youtube: 'YouTube',
@@ -79,7 +81,7 @@ export const SideNavbarCategory: FC<{
           className={`text-slate-500 dark:text-slate-300 text-lg font-sans font-medium w-4/5 truncate ${category.length < 4 ? 'uppercase' : 'capitalize'
             }`}
         >
-          {capitalizeCategory(category)}
+          {ZH(category)}
         </h1>
         <Icons.angleDown
           className={`${isOpen && 'rotate-180'

@@ -6,6 +6,7 @@ import Button from 'components/Button'
 import { sidebarData } from '../database/data'
 import { Icons } from 'components/icons'
 import { ReportBug } from 'components/ReportBug/Reportbug'
+import { ZH } from 'locales/i18n'
 
 interface SocialLinkProps {
   href: string
@@ -33,7 +34,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({
   description,
 }) => (
   <div className="md:w-1/3 w-full dark:bg-slate-800 bg-theme-primary-light hover:bg-theme-primary-light/8 dark:hover:bg-slate-700 border border-theme-secondary/25 shadow-md p-6 mb-4 rounded-lg lg:h-44">
-    <Link href={href}>
+    <Link href={href} target="_blank" rel="noopener noreferrer">
       <div className="flex items-center dark:text-text-quinary gap-2 mb-3">
         <div>{icon}</div>
         <span className="sm:inline">{title}</span>
@@ -136,24 +137,24 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>LinksHub - A hub of ready-to-use tech resources</title>
-        <meta name="title" content="LinksHub" />
+        <title>星渡斯特拉的以太之光 - 实用链接中转站</title>
+        <meta name="title" content="星渡斯特拉的以太之光" />
         <meta
           name="description"
-          content="LinksHub is the ultimate hub for free tech resources, tools, and libraries. Explore LinksHub to discover developer tools and resources tailored for growth."
+          content="星渡斯特拉的以太之光 - FF14固定队开荒实用链接中转站"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
+        {/* <meta
           name="keywords"
           content="LinksHub, developers, free resources, tools, software, libraries, frameworks, applications, websites, free tools, developer tools, tech resources"
-        />
-        <meta name="author" content="Rupali Haldiya" />
+        /> */}
+        {/* <meta name="author" content="Rupali Haldiya" /> */}
         <meta name="robots" content="index, follow" />
-        <meta name="revisit-after" content="7 days" />
-        <link rel="canonical" href="https://linkshub.dev" />
+        {/* <meta name="revisit-after" content="7 days" /> */}
+        {/* <link rel="canonical" href="https://linkshub.dev" /> */}
 
         {/* Open Graph */}
-        <meta property="og:url" content="https://linkshub.dev" />
+        {/* <meta property="og:url" content="https://linkshub.dev" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
@@ -167,10 +168,10 @@ export default function Home() {
           property="og:image"
           content="https://res.cloudinary.com/dhnkuonev/image/upload/v1683805184/linkshub_gcahgs.png"
         />
-        <meta property="og:site_name" content="LinksHub" />
+        <meta property="og:site_name" content="LinksHub" /> */}
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
+        {/* <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://linkshub.dev" />
         <meta
           property="twitter:title"
@@ -193,10 +194,10 @@ export default function Home() {
         <meta
           property="discord:invite"
           content="https://discord.com/invite/NvK67YnJX5"
-        />
+        /> */}
 
         <link rel="icon" href="/new-icon.png" className="rounded-full" />
-        <script
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -213,7 +214,7 @@ export default function Home() {
               },
             }),
           }}
-        />
+        /> */}
       </Head>
       <section
         data-custom="restrict-click-outside"
@@ -223,7 +224,7 @@ export default function Home() {
         <div>
           <div className="flex items-center justify-between">
             <h2 className="text-2xl dark:text-text-tertiary mb-0 mt-6 md:mt-0">
-              Welcome!
+              公告
             </h2>
             <div className="hidden sm:flex" onClick={handleWelcome}>
               {welcome ? (
@@ -236,9 +237,12 @@ export default function Home() {
           {welcome && (
             <>
               <p className="text-md text-text-quinary">
-                Welcome aboard, we&apos;re excited to have you at LinksHub!
+                上班时间国内早上9：30~12：30，美东21：30~0：30
               </p>
-              <div
+              <p className="text-md text-text-quinary">
+                QQ群926116127
+              </p>
+              {/* <div
                 className={
                   'min-h-52 p-8 rounded-3xl dark:bg-slate-800 bg-theme-primary-light mt-4 mb-6 border border-theme-secondary/25 shadow-md'
                 }
@@ -291,13 +295,13 @@ export default function Home() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </>
           )}
         </div>
         <div>
           <div className="flex items-center justify-between mt-4">
-            <div className="text-2xl dark:text-text-tertiary">Community</div>
+            <div className="text-2xl dark:text-text-tertiary">游戏社区</div>
             <div className="hidden sm:flex" onClick={handleCommunity}>
               {community ? (
                 <Icons.rxCaretDown size={50} className="cursor-pointer" />
@@ -308,27 +312,27 @@ export default function Home() {
           </div>
           {community && (
             <>
-              <div className="text-text-quinary">
+              {/* <div className="text-text-quinary">
                 Get involved! Everyone is welcome!
-              </div>
+              </div> */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
                 <SocialLink
-                  href="https://twitter.com/linkshubdotdev"
-                  icon={<Icons.faX size={30} />}
-                  title="Twitter"
-                  description="Follow us on X (twitter) to get updates, announcements, and general information."
+                  href="https://bbs.nga.cn/thread.php?fid=-362960"
+                  icon={<Icons.nga size={30} />}
+                  title="NGA"
+                  description="经典屎黄色论坛"
                 />
                 <SocialLink
-                  href="https://discord.com/invite/NvK67YnJX5"
+                  href="https://discord.gg/996t5z77"
                   icon={<Icons.faDiscord size={30} />}
-                  title="Discord"
-                  description="Join our community for updates, ask questions, and share tips."
+                  title="Discord频道"
+                  description="固定队开荒频道"
                 />
                 <SocialLink
-                  href="https://github.com/rupali-codes/LinksHub"
-                  icon={<Icons.faGithub size={30} />}
-                  title="GitHub"
-                  description="Join us here to report bugs & issues, and suggest features."
+                  href="https://ff14risingstones.web.sdo.com/pc/index.html#/post"
+                  icon={<Icons.shizhijia size={30} />}
+                  title="石之家"
+                  description="官方社区，角色数据统计，跨大区"
                 />
               </div>
             </>
@@ -336,7 +340,7 @@ export default function Home() {
         </div>
         <div>
           <div className="flex items-center justify-between mt-4">
-            <div className="text-2xl dark:text-text-tertiary">Resources</div>
+            <div className="text-2xl dark:text-text-tertiary">实用链接分类</div>
             <div className="hidden sm:flex" onClick={handleResources}>
               {resources ? (
                 <Icons.rxCaretDown size={50} className="cursor-pointer" />
@@ -349,8 +353,7 @@ export default function Home() {
             {resources && (
               <>
                 <span className="text-text-quinary">
-                  We&apos;ve curated a wealth of resources just for you. Go
-                  ahead and explore at your own pace.
+                  点击以下链接跳转至相应页面
                 </span>
                 <ul className="flex flex-wrap mt-4 gap-5">
                   {resources &&
@@ -362,7 +365,7 @@ export default function Home() {
                       >
                         <div className="border border-theme-secondary border-opacity-25 shadow-sm dark:border dark:border-theme-primary dark:border-opacity-20 duration-300 transition-all dark:bg-slate-800 dark:hover:bg-slate-700 bg-theme-primary-light hover:bg-theme-primary-light/8 flex items-center justify-between rounded-xl sm:h-16 h-fit">
                           <div className="p-5 truncate ...">
-                            {el.category.toUpperCase()}
+                            {ZH(el.category)}
                           </div>
                           <div>
                             <Icons.arrowRightLong className="m-4 hidden group-hover:block" />
@@ -375,7 +378,7 @@ export default function Home() {
             )}
           </div>
         </div>
-        <div className="mt-10 mb-6 md:mb-0">
+        {/* <div className="mt-10 mb-6 md:mb-0">
           <div className="dark:bg-slate-800 bg-theme-primary-light rounded-lg border border-theme-secondary/25 sm:flex-row items-center justify-between md:p-7 md:pr-12 p-5">
             <div className="md:flex items-center gap-4">
               <div className="text-yellow-400 ml-4 lg:ml-0">
@@ -401,7 +404,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   )
