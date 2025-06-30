@@ -7,7 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import { ResultsProvider } from 'hooks/ResultsContext'
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider defaultTheme="dark">
+    <ThemeProvider defaultTheme="light">
       <GlobalProvider>
         <ResultsProvider>
           <Preloader backgroundColor="bg-yellow-100" color="#8b5cf6" size={40}>

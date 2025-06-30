@@ -7,6 +7,13 @@
     "subcategory": "web_guide"
   },
   {
+    "name": "XIVSTRAT(镜像)",
+    "description": "万一前面的打不开或者太卡可以试试这个自用镜像，不能保证是最新版本",
+    "url": "https://teemeow.hopto.org/xivstrat/",
+    "category": "guide",
+    "subcategory": "web_guide"
+  },
+  {
     "name": "WTFDIG",
     "description": "国际服所有常见攻略打法的图文和站位汇总",
     "url": "https://wtfdig.info/",

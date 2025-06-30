@@ -237,7 +237,7 @@ export default function Home() {
           {welcome && (
             <>
               <p className="text-md text-text-quinary">
-                上班时间国内早上9：30~12：30，美东21：30~0：30
+                暂定上班时间国内早上9：00，美东21：00
               </p>
               <p className="text-md text-text-quinary">
                 QQ群926116127
@@ -317,16 +317,16 @@ export default function Home() {
               </div> */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
                 <SocialLink
+                  href="https://kook.vip/THjxKB"
+                  icon={<Icons.kook size={30} />}
+                  title="Kook频道"
+                  description="固定队开荒频道"
+                />
+                <SocialLink
                   href="https://bbs.nga.cn/thread.php?fid=-362960"
                   icon={<Icons.nga size={30} />}
                   title="NGA"
                   description="经典屎黄色论坛"
-                />
-                <SocialLink
-                  href="https://discord.gg/996t5z77"
-                  icon={<Icons.faDiscord size={30} />}
-                  title="Discord频道"
-                  description="固定队开荒频道"
                 />
                 <SocialLink
                   href="https://ff14risingstones.web.sdo.com/pc/index.html#/post"

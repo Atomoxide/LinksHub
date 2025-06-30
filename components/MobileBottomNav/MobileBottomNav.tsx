@@ -20,28 +20,28 @@ const MobileBottomNav: FC = () => {
     {
       inActiveIcon: <Icons.homeInactive className={inActiveIconCls} />,
       activeIcon: <Icons.homeActive className={activeIconCls} />,
-      label: 'Home',
+      label: '首页',
       href: '/',
       spaceActive: true,
     },
-    {
-      inActiveIcon: <Icons.saveInactive className={inActiveIconCls} />,
-      activeIcon: <Icons.saveActive className={activeIconCls} />,
-      label: 'Saved',
-      href: '/saved',
-    },
+    // {
+    //   inActiveIcon: <Icons.saveInactive className={inActiveIconCls} />,
+    //   activeIcon: <Icons.saveActive className={activeIconCls} />,
+    //   label: 'Saved',
+    //   href: '/saved',
+    // },
     {
       inActiveIcon: <Icons.searchInactive className={inActiveIconCls} />,
       activeIcon: <Icons.searchActive className={activeIconCls} />,
-      label: 'Search',
+      label: '页面导航',
       onClick: toggleSearch,
     },
-    {
-      inActiveIcon: <Icons.teamInactive className={inActiveIconCls} />,
-      activeIcon: <Icons.teamActive className={activeIconCls} />,
-      label: 'Team',
-      href: '/contributors',
-    },
+    // {
+    //   inActiveIcon: <Icons.teamInactive className={inActiveIconCls} />,
+    //   activeIcon: <Icons.teamActive className={activeIconCls} />,
+    //   label: 'Team',
+    //   href: '/contributors',
+    // },
   ]
 
   const renderLinks = () =>

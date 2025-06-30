@@ -46,7 +46,7 @@ export const SideNavbarCategory: FC<{
   const { category, subcategory } = categoryData
 
   const sortedSubcategoryList = subcategory
-    .sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1))
+    // .sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1))
     .map((subcategoryData, i) => (
       <li className="-ml-0.5" key={i}>
         <SideNavbarElement category={category} subcat={subcategoryData} />

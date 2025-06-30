@@ -17,7 +17,7 @@ export function ThemeToggler() {
   }
 
   const handleThemeToggle = () => {
-    setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
   const themeColor = resolvedTheme === 'light' ? '#F5F3FF' : '#0F172A'

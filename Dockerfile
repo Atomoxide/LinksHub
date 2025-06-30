@@ -1,21 +1,31 @@
-FROM node:18
-
-# Set the working directory
+# ---- Stage 1: Install dependencies ----
+FROM node:18-alpine AS deps
+RUN corepack enable
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package.json ./
-COPY pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
-# Install dependencies
-RUN npm install -g pnpm
-RUN pnpm install
+# ---- Stage 2: Build the Next.js app ----
+FROM node:18-alpine AS builder
+RUN corepack enable
+WORKDIR /app
 
-# Copy the rest of your application
 COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+RUN pnpm build
 
-# Expose the port the app runs on
-EXPOSE 3000
+# ---- Stage 3: Production image ----
+FROM node:18-alpine AS runner
+RUN corepack enable
+WORKDIR /app
 
-# Run the application
-CMD ["pnpm", "dev"]
+ENV NODE_ENV=production
+
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/next.config.js ./next.config.js
+
+CMD ["pnpm", "start"]

@@ -26,10 +26,14 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
   }`
 
   const sortedData = filterDB.length
-    ? [...filterDB[0]].sort((a: IData, b: IData) =>
-        a.name.localeCompare(b.name)
-      )
+    ? [...filterDB[0]]
     : []
+
+  // const sortedData = filterDB.length
+  //   ? [...filterDB[0]].sort((a: IData, b: IData) =>
+  //       a.name.localeCompare(b.name)
+  //     )
+  //   : []
 
   const numberOfCards = sortedData.length
 
