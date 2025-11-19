@@ -19,10 +19,18 @@ export const sidebarData: ISidebar[] = [
       { name: 'loot_schedule', url: '/loot_schedule', resources: DB.lootSchedule }
     ]
   },
+  // {
+  //   category: 'hunt',
+  //   subcategory: [
+  //     { name: 'hunt_schedule', url: '/hunt_schedule', resources: DB.huntSchedule },
+  //   ]
+  // },
   {
-    category: 'hunt',
+    category: 'tool',
     subcategory: [
-      { name: 'hunt_schedule', url: '/hunt_schedule', resources: DB.huntSchedule },
+      { name: 'info', url: '/info', resources: DB.info },
+      { name: 'official', url: '/official', resources: DB.official },
+      { name: 'plugin', url: '/plugin', resources: DB.plugin }
     ]
   },
   // {

@@ -335,6 +335,14 @@ const categoryDescriptions: CategoryDescriptions = {
   // Hunt
   hunt_schedule:
     '跟车狩猎看这里',
+  
+  // Tool
+  info:
+    '外部资讯网站',
+  official:
+    '官方工具',
+  plugin:
+    '第三方插件'
 }
 
 export default categoryDescriptions

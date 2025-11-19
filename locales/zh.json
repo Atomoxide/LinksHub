@@ -6,5 +6,9 @@
   "gear_build": "配装",
   "loot_schedule": "分配表格",
   "hunt": "怪物狩猎",
-  "hunt_schedule": "A怪狩猎时间表"
+  "hunt_schedule": "A怪狩猎时间表",
+  "tool": "外部工具",
+  "info": "资讯",
+  "official": "官方",
+  "plugin": "插件"
 }

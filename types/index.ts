@@ -38,6 +38,7 @@ export type Category =
   | 'guide'
   | 'gear'
   | 'hunt'
+  | 'tool'
   // | 'frontend'
   // | 'backend'
   // | 'CMS-toolkit'

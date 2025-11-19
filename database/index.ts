@@ -190,3 +190,8 @@ export { default as lootSchedule } from './gears/loot_schedule.json'
 
 // Hunt
 export { default as huntSchedule } from './hunt/hunt_schedule.json'
+
+// Tool
+export { default as info } from './tool/info.json'
+export { default as official } from './tool/official.json'
+export { default as plugin } from './tool/plugin.json'

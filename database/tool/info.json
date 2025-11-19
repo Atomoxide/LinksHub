@@ -1,0 +1,23 @@
+[
+  {
+    "name": "中文Wiki",
+    "description": "FF14中文维基",
+    "url": "https://ff14.huijiwiki.com/wiki/",
+    "category": "tool",
+    "subcategory": "info"
+  },
+  {
+    "name": "国服狩猎时间表",
+    "description": "国服各大区各服务器的A怪狩猎时间表一览，一只10点天道神典石！",
+    "url": "https://www.kdocs.cn/l/csd1ymWeo1HY",
+    "category": "tool",
+    "subcategory": "info"
+  },
+  {
+    "name": "绝杀宗长",
+    "description": "幻巧宗长拼图棋盘枚举",
+    "url": "https://docs.qq.com/sheet/DS3dSWnlEdWZxWFls?tab=BB08J3",
+    "category": "tool",
+    "subcategory": "info"
+  }
+]
