@@ -1,5 +1,6 @@
 // lib/dataCache.ts
 import { ISidebar, Category } from "types";
+import { cache } from 'react'
 
 interface ApiResponse {
     sidebarData: ISidebar[];
@@ -9,7 +10,7 @@ interface ApiResponse {
 let cachedData: ApiResponse | null = null;
 
 // fetch from API once
-export async function getAppData(): Promise<ApiResponse> {
+export const getAppData = cache(async (): Promise<ApiResponse> => {
     if (cachedData) return cachedData;
 
     const res = await fetch("http://127.0.0.1:5000/api/get_data");
@@ -37,4 +38,26 @@ export async function getAppData(): Promise<ApiResponse> {
 
     cachedData = { sidebarData };
     return cachedData;
+})
+
+export async function getSubCategories() {
+    const sidebarData = await getAppData()
+
+    return sidebarData.sidebarData.flatMap(({ category, subcategory }) =>
+        subcategory.map(({ url }) => ({
+            category,
+            subcategory: url.replace('/', ''),
+        }))
+    )
+}
+
+export async function getSearchOptions() {
+    const sidebarData = await getAppData()
+
+    return sidebarData.sidebarData.flatMap(({ category, subcategory }) =>
+        subcategory.map((subcat) => ({
+            ...subcat,
+            category,
+        }))
+    )
 }
