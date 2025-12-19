@@ -1,13 +1,19 @@
 import { useReducer, createContext, ReactNode } from 'react'
-import { IContext } from 'types'
+import { IContext, ISidebar } from 'types'
 import GlobalReducer from './GlobalReducer'
 
 const initialState: IContext = {
   sidebar: false,
+  sidebarData: [],
 }
-const GlobalContext = createContext<IContext>(initialState)
+const GlobalContext = createContext<IContext>({
+  ...initialState,
+  openNav: () => {},
+  closeNav: () => {},
+  toggleNav: () => {},
+})
 
-const GlobalProvider = ({ children }: { children: ReactNode }) => {
+const GlobalProvider = ({ children, sidebarData }: { children: ReactNode; sidebarData: ISidebar[] }) => {
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
   function openNav() {
     dispatch({
@@ -29,6 +35,7 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
     <GlobalContext.Provider
       value={{
         sidebar: state.sidebar,
+        sidebarData: sidebarData,
         openNav,
         closeNav,
         toggleNav,

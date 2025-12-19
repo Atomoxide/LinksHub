@@ -7,21 +7,20 @@ interface ApiResponse {
     // add other cached data if needed
 }
 
-let cachedData: ApiResponse | null = null;
 
-// fetch from API once
-export const getAppData = cache(async (): Promise<ApiResponse> => {
-    if (cachedData) return cachedData;
+let cachedData: ISidebar[] | null = null
 
-    const res = await fetch("http://127.0.0.1:5000/api/get_data");
-    if (!res.ok) throw new Error("Failed to fetch API data");
+export async function getAppData(): Promise<ISidebar[]> {
+    if (cachedData) return cachedData
 
-    const apiData = await res.json();
+    const res = await fetch('http://127.0.0.1:5000/api/get_data')
+    if (!res.ok) throw new Error('Failed to fetch API data')
 
-    // transform API data into your ISidebar[] format
+    const apiData = await res.json()
+
     const sidebarData: ISidebar[] = Object.entries(apiData).map(
         ([category, subcats]: [string, any]) => ({
-            category: category as Category, // cast string to Category
+            category: category as any,
             subcategory: Object.entries(subcats).map(([subName, items]: [string, any]) => ({
                 name: subName,
                 url: `/${subName}`,
@@ -30,20 +29,20 @@ export const getAppData = cache(async (): Promise<ApiResponse> => {
                     name: item.item_name,
                     description: item.item_description,
                     url: item.item_url,
-                    category: category as Category,
+                    category: category as any,
                     subcategory: subName,
                 })),
             })),
-        }));
+        }))
 
-    cachedData = { sidebarData };
-    return cachedData;
-})
+    cachedData = sidebarData
+    return cachedData
+}
 
 export async function getSubCategories() {
     const sidebarData = await getAppData()
 
-    return sidebarData.sidebarData.flatMap(({ category, subcategory }) =>
+    return sidebarData.flatMap(({ category, subcategory }) =>
         subcategory.map(({ url }) => ({
             category,
             subcategory: url.replace('/', ''),
@@ -54,7 +53,7 @@ export async function getSubCategories() {
 export async function getSearchOptions() {
     const sidebarData = await getAppData()
 
-    return sidebarData.sidebarData.flatMap(({ category, subcategory }) =>
+    return sidebarData.flatMap(({ category, subcategory }) =>
         subcategory.map((subcat) => ({
             ...subcat,
             category,

@@ -84,6 +84,7 @@ export interface SearchbarProps {
 
 export interface IContext {
   sidebar: boolean
+  sidebarData: ISidebar[]
   openNav?: () => void
   closeNav?: () => void
   toggleNav?: () => void
