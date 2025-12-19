@@ -10,7 +10,15 @@ import Image from 'next/image';
 import logoPng from 'assets/logo.webp'
 import { Icons } from 'components/icons'
 
-export const Header: FC = () => {
+import { getVersion } from 'lib/variablesCache';
+
+
+type HomeProps = {
+  version: string;
+  version_logo: string;
+};
+
+export const Header: FC<HomeProps> = ({ version, version_logo }) => {
   const router = useRouter()
 
   const iconClass =
@@ -101,8 +109,8 @@ export const Header: FC = () => {
           <ul className="w-full flex gap-0.5 tall:gap-1">{renderLinks()}</ul>
         </nav> */}
         <div className="flex items-center justify-center gap-[14px]">
-          <h2 className='patch'>国服版本：7.21</h2>
-          <img src="/noteImg720.png" alt="patch note" className="w-auto h-16 rounded-md"/>
+          <h2 className='patch'>国服版本：{version}</h2>
+          <img src={version_logo} alt="patch note" className="w-auto h-16 rounded-md"/>
           {/* {socialIcons.map(
             ({ icon, title, href, ariaLabel, showOnMobile }, i) => (
               <Link

@@ -11,13 +11,19 @@ import { GlobalContext } from 'context/GlobalContext'
 
 import MobileBottomNav from 'components/MobileBottomNav/MobileBottomNav'
 
-const GeneralLayout = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode;
+  version: string;
+  version_logo: string;
+};
+
+const GeneralLayout = ({ children, version, version_logo }: Props) => {
   const { sidebar } = useContext<IContext>(GlobalContext)
 
   return (
     <>
       <SkipLink />
-      <Header />
+      <Header version={version} version_logo={version_logo} />
       <SideNavbar />
       <div
         className={`row-start-2 row-end-3 overflow-y-scroll h-full w-full bg-gray-100 dark:bg-[#101623] ${
