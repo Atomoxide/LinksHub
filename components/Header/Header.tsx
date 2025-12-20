@@ -109,7 +109,7 @@ export const Header: FC<HomeProps> = ({ version, version_logo }) => {
           <ul className="w-full flex gap-0.5 tall:gap-1">{renderLinks()}</ul>
         </nav> */}
         <div className="flex items-center justify-center gap-[14px]">
-          <h2 className='patch'>国服版本：{version}</h2>
+          <h2 className='patch'>FFXIV 游戏版本：{version}</h2>
           <img src={version_logo} alt="patch note" className="w-auto h-16 rounded-md"/>
           {/* {socialIcons.map(
             ({ icon, title, href, ariaLabel, showOnMobile }, i) => (

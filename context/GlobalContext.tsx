@@ -17,6 +17,8 @@ const initialState: IContext = {
   version_logo: '',
   subcategoryList: {},
   i18nZH: {},
+  announcement: '',
+  channel: '',
 }
 const GlobalContext = createContext<IContext>({
   ...initialState,
@@ -35,15 +37,19 @@ interface GlobalProviderProps {
   initialGroupedData: IData[][]
   initialSubcategoryList: { [key: string]: string }
   initialI18nZH: { [key: string]: string }
+  initialAnnouncement: string
+  initialChannel: string
 }
 
-const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo, initialGroupedData, initialSubcategoryList, initialI18nZH }: GlobalProviderProps) => {
+const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo, initialGroupedData, initialSubcategoryList, initialI18nZH, initialAnnouncement, initialChannel }: GlobalProviderProps) => {
   const [sidebarData, setSidebarData] = useState<ISidebar[]>(initialSidebar)
   const [version] = useState(initialVersion)
   const [versionLogo] = useState(initialLogo)
   const [groupedData] = useState<IData[][]>(initialGroupedData)
   const [subcategoryList] = useState<{ [key: string]: string }>(initialSubcategoryList)
   const [i18nZH] = useState<{ [key: string]: string }>(initialI18nZH)
+  const [announcement] = useState<string>(initialAnnouncement)
+  const [channel] = useState<string>(initialChannel)
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
   function openNav() {
     dispatch({
@@ -71,6 +77,8 @@ const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo,
         groupedData: groupedData,
         subcategoryList: subcategoryList,
         i18nZH: i18nZH,
+        announcement: announcement,
+        channel: channel,
         openNav,
         closeNav,
         toggleNav,

@@ -91,6 +91,8 @@ export interface IContext {
   version_logo: string
   subcategoryList: {[key: string]: string}
   i18nZH: {[key: string]: string}
+  announcement: string
+  channel: string
   openNav?: () => void
   closeNav?: () => void
   toggleNav?: () => void

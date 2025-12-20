@@ -108,7 +108,9 @@ export default function Home() {
   const [starCount, setStarCount] = useState(0)
   const [forkCount, setForkCount] = useState(0)
 
-  const { sidebarData } = useGlobal()
+  const { sidebarData, announcement, channel } = useGlobal()
+  const normalizedAnnouncement = announcement.replace(/\\n/g, '\n');
+  console.log('this is announcement', channel);
 
   useEffect(() => {
     const getStarForkCount = async () => {
@@ -239,11 +241,8 @@ export default function Home() {
           </div>
           {welcome && (
             <>
-              <p className="text-md text-text-quinary">
-                暂定上班时间国内早上9：00，美东21：00
-              </p>
-              <p className="text-md text-text-quinary">
-                QQ群926116127
+              <p className="text-md text-text-quinary" style={{ whiteSpace: 'pre-line' }}>
+                {normalizedAnnouncement ? normalizedAnnouncement : 'No announcements at the moment.'}
               </p>
               {/* <div
                 className={
@@ -320,9 +319,9 @@ export default function Home() {
               </div> */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
                 <SocialLink
-                  href="https://kook.vip/THjxKB"
-                  icon={<Icons.kook size={30} />}
-                  title="Kook频道"
+                  href={channel}
+                  icon={<Icons.faDiscord size={30} />}
+                  title="语音频道"
                   description="固定队开荒频道"
                 />
                 <SocialLink

@@ -83,6 +83,8 @@ interface ApiResponse {
     groupedData: IData[][];
     subcategoryList: { [key: string]: string };
     i18nZH: { [key: string]: string };
+    announcement: string;
+    channel: string;
     // add other cached data if needed
 }
 
@@ -146,10 +148,22 @@ export async function getAppData(): Promise<ApiResponse> {
 
         const i18nZH = await res4.json();
 
-        cachedData = { sidebarData, groupedData, subcategoryList, i18nZH };
+        const res5 = await fetch("http://localhost:5000/api/get_announcement");
+        if (!res5.ok) throw new Error("Failed to fetch announcement data");
+
+        const announcementData = await res5.json();
+        const announcement = announcementData.announcement || "";
+
+        const res6 = await fetch("http://localhost:5000/api/get_channel");
+        if (!res6.ok) throw new Error("Failed to fetch channel data");
+
+        const channelData = await res6.json();
+        const channel = channelData.channels || "";
+
+        cachedData = { sidebarData, groupedData, subcategoryList, i18nZH, announcement, channel };
     } catch (error) {
         console.log("Error fetching sidebar data:", error);
-        cachedData = { sidebarData: [], groupedData: [], subcategoryList: {}, i18nZH: {} }; // Fallback value
+        cachedData = { sidebarData: [], groupedData: [], subcategoryList: {}, i18nZH: {}, announcement: "", channel: "" }; // Fallback value
         return cachedData;
     }
     return cachedData;
