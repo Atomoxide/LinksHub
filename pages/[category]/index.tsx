@@ -4,7 +4,7 @@ import { SubCategories } from 'types'
 import Head from 'next/head'
 import Link from 'next/link'
 import BreadCrumbs from 'components/Breadcrumbs'
-import categoryDescriptions from 'components/TopBar/CategoryDescriptions'
+// import categoryDescriptions from 'components/TopBar/CategoryDescriptions'
 import { Icons } from 'components/icons'
 import { ReportBug } from 'components/ReportBug/Reportbug'
 import { ZH } from 'locales/i18n'
@@ -14,6 +14,8 @@ const CategoryPage = () => {
   const router = useRouter()
   const { sidebarData } = useGlobal()
   const { category } = router.query as { category: string }
+  const categoryDescriptions: { [key: string]: string } = useGlobal().subcategoryList
+
 
   const subcategories: SubCategories[] = category
     ? sidebarData.filter((c) => c.category == category)[0]['subcategory']
@@ -21,6 +23,7 @@ const CategoryPage = () => {
 
   const getDesc = (subcatName: string) => {
     for (const desc in categoryDescriptions) {
+      console.log('found description for', desc)
       if (desc == subcatName) {
         return categoryDescriptions[desc]
       }

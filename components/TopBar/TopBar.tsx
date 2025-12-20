@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
-import categoryDescriptions from './CategoryDescriptions'
+// import categoryDescriptions from './CategoryDescriptions'
 import { isValidResource, regEx } from './utils'
 import Link from 'next/link'
 import CardTooltip from 'components/CardTooltip/CardTooltip'
 import { Icons } from 'components/icons'
 import { ZH } from 'locales/i18n'
+import { useGlobal } from 'context/GlobalContext'
 
 interface TopBarProps {
   className?: string
@@ -15,7 +16,7 @@ interface TopBarProps {
 export const TopBar: FC<TopBarProps> = ({}) => {
   const router = useRouter()
   const { theme } = useTheme()
-
+  const categoryDescriptions: { [key: string]: string } = useGlobal().subcategoryList
   const category = router.asPath
   const categoryNameLink = category?.split('/')[1]
   const categoryName = category?.split('/')[1]?.split('-').join(' ')

@@ -11,7 +11,7 @@ export async function getVersion(): Promise<VersionResponse> {
     if (cachedVersion) {
         return cachedVersion;
     }
-    console.log("Fetching version from API...");
+    // console.log("Fetching version from API...");
     try {
         const res = await fetch("http://localhost:5000/api/get_version", {
             method: "GET",
@@ -50,7 +50,7 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
     if (cachedVersionLogo) {
         return cachedVersionLogo;
     }
-    console.log("Fetching version logo from API...");
+    // console.log("Fetching version logo from API...");
 
     try {
         const res = await fetch("http://localhost:5000/api/get_version_logo", {
@@ -81,6 +81,8 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
 interface ApiResponse {
     sidebarData: ISidebar[];
     groupedData: IData[][];
+    subcategoryList: { [key: string]: string };
+    i18nZH: { [key: string]: string };
     // add other cached data if needed
 }
 
@@ -133,10 +135,21 @@ export async function getAppData(): Promise<ApiResponse> {
         // Convert to array of arrays
         const groupedData: IData[][] = Object.values(grouped)
 
-        cachedData = { sidebarData, groupedData };
+        const res3 = await fetch("http://localhost:5000/api/get_subcategories");
+        if (!res3.ok) throw new Error("Failed to fetch subcategory list");
+
+        const subcategoryList = await res3.json();
+        // console.log("Fetched subcategory list:", subcategoryList);
+
+        const res4 = await fetch("http://localhost:5000/api/get_i18n_ZH");
+        if (!res4.ok) throw new Error("Failed to fetch i18n data");
+
+        const i18nZH = await res4.json();
+
+        cachedData = { sidebarData, groupedData, subcategoryList, i18nZH };
     } catch (error) {
         console.log("Error fetching sidebar data:", error);
-        cachedData = { sidebarData: [], groupedData: [] }; // Fallback value
+        cachedData = { sidebarData: [], groupedData: [], subcategoryList: {}, i18nZH: {} }; // Fallback value
         return cachedData;
     }
     return cachedData;

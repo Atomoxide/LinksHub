@@ -89,6 +89,8 @@ export interface IContext {
   groupedData: IData[][]
   version: string
   version_logo: string
+  subcategoryList: {[key: string]: string}
+  i18nZH: {[key: string]: string}
   openNav?: () => void
   closeNav?: () => void
   toggleNav?: () => void

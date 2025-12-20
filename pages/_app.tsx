@@ -14,12 +14,14 @@ type MyAppProps = AppProps & {
   version_logo: string
   sidebarData: ISidebar[]
   groupedData: IData[][]
+  subcategoryList: { [key: string]: string }
+  i18nZH: { [key: string]: string }
 };
 
-function App({ Component, pageProps, version, version_logo, sidebarData, groupedData }: MyAppProps) {
+function App({ Component, pageProps, version, version_logo, sidebarData, groupedData, subcategoryList, i18nZH }: MyAppProps) {
   return (
     <ThemeProvider defaultTheme="light">
-      <GlobalProvider initialSidebar={sidebarData} initialVersion={version} initialLogo={version_logo} initialGroupedData={groupedData}>
+      <GlobalProvider initialSidebar={sidebarData} initialVersion={version} initialLogo={version_logo} initialGroupedData={groupedData} initialSubcategoryList={subcategoryList} initialI18nZH={i18nZH}>
         <ResultsProvider>
           <Preloader backgroundColor="bg-yellow-100" color="#8b5cf6" size={40}>
             <GeneralLayout>
@@ -36,8 +38,8 @@ App.getInitialProps = async () => {
   if (typeof window !== 'undefined') return { } // Skip on client side
   const { version } = await getVersion();
   const { version_logo } = await getVersionLogo();
-  const { sidebarData, groupedData } = await getAppData();
-  return { version, version_logo, sidebarData, groupedData };
+  const { sidebarData, groupedData, subcategoryList, i18nZH } = await getAppData();
+  return { version, version_logo, sidebarData, groupedData, subcategoryList, i18nZH };
 };
 
 
