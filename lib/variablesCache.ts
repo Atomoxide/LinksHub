@@ -1,4 +1,4 @@
-import { ISidebar, Category } from "types";
+import { ISidebar, Category, IData } from "types";
 
 /////// Version //////////////////
 export type VersionResponse = {
@@ -80,6 +80,7 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
 ////////// Sidebar Data //////////////////
 interface ApiResponse {
     sidebarData: ISidebar[];
+    groupedData: IData[][];
     // add other cached data if needed
 }
 
@@ -90,32 +91,52 @@ export async function getAppData(): Promise<ApiResponse> {
     if (cachedData) return cachedData;
 
     try {
-    const res = await fetch("http://localhost:5000/api/get_data");
-    if (!res.ok) throw new Error("Failed to fetch API data");
+        const res1 = await fetch("http://localhost:5000/api/get_data");
+        if (!res1.ok) throw new Error("Failed to fetch API data");
 
-    const apiData = await res.json();
+        const apiData = await res1.json();
 
-    // transform API data into your ISidebar[] format
-    const sidebarData: ISidebar[] = Object.entries(apiData).map(
-        ([category, subcats]: [string, any]) => ({
-            category: category as Category, // cast string to Category
-            subcategory: Object.entries(subcats).map(([subName, items]: [string, any]) => ({
-                name: subName,
-                url: `/${subName}`,
-                resources: items.map((item: any) => ({
-                    id: String(item.item_id),
-                    name: item.item_name,
-                    description: item.item_description,
-                    url: item.item_url,
-                    category: category as Category,
-                    subcategory: subName,
+        // transform API data into your ISidebar[] format
+        const sidebarData: ISidebar[] = Object.entries(apiData).map(
+            ([category, subcats]: [string, any]) => ({
+                category: category as Category, // cast string to Category
+                subcategory: Object.entries(subcats).map(([subName, items]: [string, any]) => ({
+                    name: subName,
+                    url: `/${subName}`,
+                    resources: items.map((item: any) => ({
+                        id: String(item.item_id),
+                        name: item.item_name,
+                        description: item.item_description,
+                        url: item.item_url,
+                        category: category as Category,
+                        subcategory: subName,
+                    })),
                 })),
-            })),
-        }))
-    cachedData = { sidebarData };
+            }))
+
+        const res2 = await fetch("http://localhost:5000/api/get_data_raw");
+        if (!res2.ok) throw new Error("Failed to fetch API raw data");
+
+        const rawData = await res2.json();
+
+        const grouped: Record<string, IData[]> = {}
+
+        // Populate the grouped object
+        rawData.forEach((item: IData) => {
+        const key = item.subcategory
+        if (!grouped[key]) {
+            grouped[key] = []
+        }
+        grouped[key].push(item)
+        })
+
+        // Convert to array of arrays
+        const groupedData: IData[][] = Object.values(grouped)
+
+        cachedData = { sidebarData, groupedData };
     } catch (error) {
         console.log("Error fetching sidebar data:", error);
-        cachedData = { sidebarData: [] }; // Fallback value
+        cachedData = { sidebarData: [], groupedData: [] }; // Fallback value
         return cachedData;
     }
     return cachedData;

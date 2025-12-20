@@ -1,5 +1,5 @@
 import { useReducer, createContext, ReactNode, useState, useContext } from 'react'
-import { IContext, ISidebar } from 'types'
+import { IContext, IData, ISidebar } from 'types'
 import GlobalReducer from './GlobalReducer'
 
 interface IGlobalContext {
@@ -12,6 +12,7 @@ interface IGlobalContext {
 const initialState: IContext = {
   sidebar: false,
   sidebarData: [],
+  groupedData: [],
   version: '',
   version_logo: '',
 }
@@ -29,12 +30,14 @@ interface GlobalProviderProps {
   initialSidebar: ISidebar[]
   initialVersion: string
   initialLogo: string
+  initialGroupedData: IData[][]
 }
 
-const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo }: GlobalProviderProps) => {
+const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo, initialGroupedData }: GlobalProviderProps) => {
   const [sidebarData, setSidebarData] = useState<ISidebar[]>(initialSidebar)
   const [version] = useState(initialVersion)
   const [versionLogo] = useState(initialLogo)
+  const [groupedData] = useState<IData[][]>(initialGroupedData)
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
   function openNav() {
     dispatch({
@@ -59,6 +62,7 @@ const GlobalProvider = ({ children, initialSidebar, initialVersion, initialLogo 
         sidebarData: sidebarData,
         version: version,
         version_logo: versionLogo,
+        groupedData: groupedData,
         openNav,
         closeNav,
         toggleNav,

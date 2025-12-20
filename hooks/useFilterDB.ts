@@ -1,9 +1,12 @@
-import { database } from 'database/data'
+// import { database } from 'database/data'
 import { useRouter } from 'next/router'
 import { IData } from 'types'
 import { useResults } from './ResultsContext'
+import { useGlobal } from 'context/GlobalContext'
 
 const useFilterDB = (subcategory: string) => {
+  const database = useGlobal().groupedData
+  // console.log('useFilterDB called with subcategory:', database)
   const router = useRouter()
   const { results } = useResults()
 

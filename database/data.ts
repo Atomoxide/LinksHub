@@ -1,9 +1,11 @@
 import { IDBData, IData, ISidebar } from '../types'
 import * as DB from 'database'
 import { v4 as uuidv4 } from 'uuid'
+
 export const database: IData[][] = Object.values(DB).map((item: IDBData[]) =>
   item.map((subcat: IDBData) => ({ ...subcat, id: uuidv4() }))
 )
+
 export const sidebarData: ISidebar[] = [
   {
     category: 'guide',

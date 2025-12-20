@@ -39,6 +39,7 @@ export type Category =
   | 'gear'
   | 'hunt'
   | 'tool'
+  | 'archive'
   // | 'frontend'
   // | 'backend'
   // | 'CMS-toolkit'
@@ -85,6 +86,7 @@ export interface SearchbarProps {
 export interface IContext {
   sidebar: boolean
   sidebarData: ISidebar[]
+  groupedData: IData[][]
   version: string
   version_logo: string
   openNav?: () => void

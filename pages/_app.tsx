@@ -7,18 +7,19 @@ import { ThemeProvider } from 'next-themes'
 import { ResultsProvider } from 'hooks/ResultsContext'
 
 import { getVersion, getVersionLogo, getAppData } from 'lib/variablesCache'
-import { ISidebar } from 'types'
+import { IData, ISidebar } from 'types'
 
 type MyAppProps = AppProps & {
   version: string
   version_logo: string
   sidebarData: ISidebar[]
+  groupedData: IData[][]
 };
 
-function App({ Component, pageProps, version, version_logo, sidebarData }: MyAppProps) {
+function App({ Component, pageProps, version, version_logo, sidebarData, groupedData }: MyAppProps) {
   return (
     <ThemeProvider defaultTheme="light">
-      <GlobalProvider initialSidebar={sidebarData} initialVersion={version} initialLogo={version_logo}>
+      <GlobalProvider initialSidebar={sidebarData} initialVersion={version} initialLogo={version_logo} initialGroupedData={groupedData}>
         <ResultsProvider>
           <Preloader backgroundColor="bg-yellow-100" color="#8b5cf6" size={40}>
             <GeneralLayout>
@@ -35,8 +36,8 @@ App.getInitialProps = async () => {
   if (typeof window !== 'undefined') return { } // Skip on client side
   const { version } = await getVersion();
   const { version_logo } = await getVersionLogo();
-  const sidebarData = (await getAppData()).sidebarData;
-  return { version, version_logo, sidebarData };
+  const { sidebarData, groupedData } = await getAppData();
+  return { version, version_logo, sidebarData, groupedData };
 };
 
 
