@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { use } from 'react'
 import { TopBar } from 'components/TopBar/TopBar'
 import Head from 'next/head'
 import useFilterDB from 'hooks/useFilterDB'
 import CardsList from 'components/Cards/CardsList'
 import ComingSoon from 'components/NewIssue/NewIssue'
-import { sidebarData } from 'database/data'
+// import { sidebarData } from 'database/data'
 import { GetStaticProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { usePagination } from 'hooks/usePagination'
 import Pagination from 'components/Pagination/Pagination'
 import { ReportBug } from 'components/ReportBug/Reportbug'
 import type { IData } from 'types'
+import { useGlobal } from 'context/GlobalContext'
+import { getAppData } from 'lib/variablesCache'
 
 interface PageProps {
   category: string
@@ -132,6 +134,7 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
 }
 
 export const getStaticPaths = async () => {
+  const { sidebarData } = await getAppData()
   const paths = sidebarData.flatMap(({ category, subcategory }) =>
     subcategory.map(({ url }) => ({
       params: { category, subcategory: url.replace('/', '').split('/') },

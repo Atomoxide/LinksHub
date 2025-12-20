@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { sidebarData } from 'database/data'
+// import { sidebarData } from 'database/data'
 import { SubCategories } from 'types'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -8,9 +8,11 @@ import categoryDescriptions from 'components/TopBar/CategoryDescriptions'
 import { Icons } from 'components/icons'
 import { ReportBug } from 'components/ReportBug/Reportbug'
 import { ZH } from 'locales/i18n'
+import { useGlobal } from 'context/GlobalContext'
 
 const CategoryPage = () => {
   const router = useRouter()
+  const { sidebarData } = useGlobal()
   const { category } = router.query as { category: string }
 
   const subcategories: SubCategories[] = category

@@ -3,10 +3,11 @@ import Head from 'next/head'
 import Logo from 'assets/logo.svg'
 import Link from 'next/link'
 import Button from 'components/Button'
-import { sidebarData } from '../database/data'
+// import { sidebarData } from '../database/data'
 import { Icons } from 'components/icons'
 import { ReportBug } from 'components/ReportBug/Reportbug'
 import { ZH } from 'locales/i18n'
+import { useGlobal } from 'context/GlobalContext'
 
 interface SocialLinkProps {
   href: string
@@ -106,6 +107,8 @@ export default function Home() {
 
   const [starCount, setStarCount] = useState(0)
   const [forkCount, setForkCount] = useState(0)
+
+  const { sidebarData } = useGlobal()
 
   useEffect(() => {
     const getStarForkCount = async () => {

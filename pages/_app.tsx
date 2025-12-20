@@ -35,7 +35,7 @@ App.getInitialProps = async () => {
   if (typeof window !== 'undefined') return { } // Skip on client side
   const { version } = await getVersion();
   const { version_logo } = await getVersionLogo();
-  const sidebarData = await getAppData();
+  const sidebarData = (await getAppData()).sidebarData;
   return { version, version_logo, sidebarData };
 };
 

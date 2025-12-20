@@ -1,4 +1,6 @@
-import { sidebarData } from 'database/data'
+// import { sidebarData } from 'database/data'
+
+import { useGlobal } from "context/GlobalContext"
 
 export const regEx = /[ `!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/g
 
@@ -11,6 +13,7 @@ const cleanText = (text: string) =>
 
 export const isValidResource = (name: string) => {
   if (!name) return
+  const { sidebarData } = useGlobal()
 
   const subCategoryNames: string[] = []
   sidebarData.forEach((category) =>

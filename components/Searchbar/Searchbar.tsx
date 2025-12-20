@@ -11,7 +11,7 @@ import { ErrorMessage } from 'components/ErrorMessage'
 
 import { Icons } from 'components/icons'
 
-import { SubCategories, subcategoryArray } from '../../types'
+import { SubCategories } from '../../types'
 import { SearchbarAction } from './SearchbarReducer'
 import { sidebarData } from 'database/data'
 import { searchOptions as importedSearchOptions } from 'database/data'

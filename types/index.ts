@@ -1,4 +1,4 @@
-import { sidebarData } from 'database/data'
+// import { sidebarData } from 'database/data'
 
 export type DataList = {
   name: string
@@ -92,6 +92,6 @@ export interface IContext {
   toggleNav?: () => void
 }
 
-export const subcategoryArray = sidebarData
-  .map((item) => item.subcategory.flat())
-  .flat()
+// export const subcategoryArray = sidebarData
+//   .map((item) => item.subcategory.flat())
+//   .flat()
