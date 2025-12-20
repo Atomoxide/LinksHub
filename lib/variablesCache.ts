@@ -11,22 +11,29 @@ export async function getVersion(): Promise<VersionResponse> {
     if (cachedVersion) {
         return cachedVersion;
     }
+    console.log("Fetching version from API...");
+    try {
+        const res = await fetch("http://localhost:5000/api/get_version", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (!res.ok) {
+            throw new Error(`Failed to fetch version: ${res.status}`);
+        }
 
-    const res = await fetch("http://127.0.0.1:5000/api/get_version", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+        const data: VersionResponse = await res.json();
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch version: ${res.status}`);
+        // Cache result in memory
+        cachedVersion = data;
+    } catch (error) {
+        console.log("Error fetching version:", error);
+        cachedVersion = { version: "unknown" }; // Fallback value
+        return cachedVersion;
     }
 
-    const data: VersionResponse = await res.json();
 
-    // Cache result in memory
-    cachedVersion = data;
 
     return cachedVersion;
 }
@@ -43,22 +50,29 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
     if (cachedVersionLogo) {
         return cachedVersionLogo;
     }
+    console.log("Fetching version logo from API...");
 
-    const res = await fetch("http://127.0.0.1:5000/api/get_version_logo", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+    try {
+        const res = await fetch("http://localhost:5000/api/get_version_logo", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch version logo: ${res.status}`);
+        if (!res.ok) {
+            throw new Error(`Failed to fetch version logo: ${res.status}`);
+        }
+
+        const data: VersionLogoResponse = await res.json();
+
+        // Cache result in memory
+        cachedVersionLogo = data;
+    } catch (error) {
+        console.log("Error fetching version logo:", error);
+        cachedVersionLogo = { version_logo: "" }; // Fallback value
+        return cachedVersionLogo;
     }
-
-    const data: VersionLogoResponse = await res.json();
-
-    // Cache result in memory
-    cachedVersionLogo = data;
 
     return cachedVersionLogo;
 }
@@ -75,7 +89,8 @@ let cachedData: ApiResponse | null = null;
 export async function getAppData(): Promise<ApiResponse> {
     if (cachedData) return cachedData;
 
-    const res = await fetch("http://127.0.0.1:5000/api/get_data");
+    try {
+    const res = await fetch("http://localhost:5000/api/get_data");
     if (!res.ok) throw new Error("Failed to fetch API data");
 
     const apiData = await res.json();
@@ -98,5 +113,10 @@ export async function getAppData(): Promise<ApiResponse> {
             })),
         }))
     cachedData = { sidebarData };
+    } catch (error) {
+        console.log("Error fetching sidebar data:", error);
+        cachedData = { sidebarData: [] }; // Fallback value
+        return cachedData;
+    }
     return cachedData;
 }

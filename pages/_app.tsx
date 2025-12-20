@@ -6,9 +6,7 @@ import { Preloader } from 'components/Loader/Preloader'
 import { ThemeProvider } from 'next-themes'
 import { ResultsProvider } from 'hooks/ResultsContext'
 
-import { getVersion } from 'lib/variablesCache'
-import { getVersionLogo } from 'lib/variablesCache'
-import { getAppData } from 'lib/dataCache'
+import { getVersion, getVersionLogo, getAppData } from 'lib/variablesCache'
 import { ISidebar } from 'types'
 
 type MyAppProps = AppProps & {
@@ -20,10 +18,10 @@ type MyAppProps = AppProps & {
 function App({ Component, pageProps, version, version_logo, sidebarData }: MyAppProps) {
   return (
     <ThemeProvider defaultTheme="light">
-      <GlobalProvider sidebarData={sidebarData}>
+      <GlobalProvider initialSidebar={sidebarData} initialVersion={version} initialLogo={version_logo}>
         <ResultsProvider>
           <Preloader backgroundColor="bg-yellow-100" color="#8b5cf6" size={40}>
-            <GeneralLayout version={version} version_logo={version_logo}>
+            <GeneralLayout>
               <Component {...pageProps} />
             </GeneralLayout>
           </Preloader>
@@ -34,6 +32,7 @@ function App({ Component, pageProps, version, version_logo, sidebarData }: MyApp
 }
 
 App.getInitialProps = async () => {
+  if (typeof window !== 'undefined') return { } // Skip on client side
   const { version } = await getVersion();
   const { version_logo } = await getVersionLogo();
   const sidebarData = await getAppData();

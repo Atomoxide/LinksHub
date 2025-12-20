@@ -13,12 +13,10 @@ import MobileBottomNav from 'components/MobileBottomNav/MobileBottomNav'
 
 type Props = {
   children: ReactNode;
-  version: string;
-  version_logo: string;
 };
 
-const GeneralLayout = ({ children, version, version_logo }: Props) => {
-  const { sidebar } = useContext<IContext>(GlobalContext)
+const GeneralLayout = ({ children }: Props) => {
+  const { sidebar, version, version_logo } = useContext<IContext>(GlobalContext)
 
   return (
     <>
