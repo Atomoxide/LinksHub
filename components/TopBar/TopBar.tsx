@@ -21,6 +21,8 @@ export const TopBar: FC<TopBarProps> = ({}) => {
   const categoryNameLink = category?.split('/')[1]
   const categoryName = category?.split('/')[1]?.split('-').join(' ')
   const subcategoryName = category?.split('/')[2]?.split('-').join(' ')
+  const { sidebarData } = useGlobal()
+
 
   const searchQuery = router.query.query?.toString() || ''
 
@@ -40,7 +42,7 @@ export const TopBar: FC<TopBarProps> = ({}) => {
   }
 
   const description = categoryDescriptions[searchQuery || subcategoryName] || ''
-  const isResourceSelected = isValidResource(searchQuery || subcategoryName)
+  const isResourceSelected = isValidResource(searchQuery || subcategoryName, sidebarData)
 
   if (router.pathname.length === 1) return null
   return isResourceSelected ? (

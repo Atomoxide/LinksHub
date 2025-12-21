@@ -5,7 +5,7 @@ import useFilterDB from 'hooks/useFilterDB'
 import CardsList from 'components/Cards/CardsList'
 import ComingSoon from 'components/NewIssue/NewIssue'
 // import { sidebarData } from 'database/data'
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { usePagination } from 'hooks/usePagination'
 import Pagination from 'components/Pagination/Pagination'
@@ -133,26 +133,47 @@ const SubCategory: NextPage<PageProps> = ({ subcategory }) => {
   )
 }
 
-export const getStaticPaths = async () => {
-  const { sidebarData } = await getAppData()
-  const paths = sidebarData.flatMap(({ category, subcategory }) =>
-    subcategory.map(({ url }) => ({
-      params: { category, subcategory: url.replace('/', '').split('/') },
-    }))
-  )
+// export const getStaticPaths = async () => {
+//   const { sidebarData } = await getAppData()
+//   const paths = sidebarData.flatMap(({ category, subcategory }) =>
+//     subcategory.map(({ url }) => ({
+//       params: { category, subcategory: url.replace('/', '').split('/') },
+//     }))
+//   )
 
-  return { paths, fallback: false }
-}
+//   return { paths, fallback: false }
+// }
 
-export const getStaticProps: GetStaticProps<PageProps, Params> = async (
-  context
-) => {
-  const { category, subcategory } = context.params as PageProps
+// export const getStaticProps: GetStaticProps<PageProps, Params> = async (
+//   context
+// ) => {
+//   const { category, subcategory } = context.params as PageProps
+
+//   return {
+//     props: {
+//       category,
+//       subcategory,
+//     },
+//   }
+// }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { category, subcategory } = context.params as {
+    category: string
+    subcategory: string[]
+  }
+
+  const { sidebarData } = await getAppData() // runtime fetch
+
+  // Filter subcategories for this category
+  const categoryItem = sidebarData.find((c) => c.category === category)
+  const subcategories = categoryItem ? categoryItem.subcategory : []
 
   return {
     props: {
       category,
       subcategory,
+      subcategories, // pass the latest data
     },
   }
 }

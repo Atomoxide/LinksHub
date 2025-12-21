@@ -1,13 +1,26 @@
-version: '3'
-
+version: '3.7'
 services:
-  app:
-    build: .
-    volumes:
-      - ./:/app
-      - /app/node_modules
+  nextjs:
+    image: stella_aetheryte:latest
+    container_name: stella_aetheryte
+    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
-    command: sh -c "pnpm install && pnpm dev"
+      - API_BASE_URL=http://stella_aetheryte_db:5000
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  api:
+    image: stella_aetheryte_db:latest
+    container_name: stella_aetheryte_db
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import type { SubCategories } from '../../types'
+import type { ISidebar, SubCategories } from '../../types'
 // import { sidebarData } from 'database/data'
 import { SideNavbarCategory } from './SideNavbarCategory'
 import { useRouter } from 'next/router'
@@ -9,7 +9,8 @@ import { useGlobal } from 'context/GlobalContext'
 export const SideNavbarCategoryList: FC<{
   query: string
 }> = ({ query }) => {
-  const categoriesList = getFilteredCategoryList(query)
+  const { sidebarData } = useGlobal()
+  const categoriesList = getFilteredCategoryList(query, sidebarData)
   // console.log('this is cat list in side nav', categoriesList)
   const router = useRouter()
   const [category, setCategory] = useState<string | undefined>('')
@@ -50,9 +51,8 @@ export const SideNavbarCategoryList: FC<{
   )
 }
 
-const getFilteredCategoryList = (query: string) => {
+const getFilteredCategoryList = (query: string, sidebarData: ISidebar[]) => {
   const normalizedQuery = query.toLowerCase().trim()
-  const { sidebarData } = useGlobal()
   // console.log('this is sidebar data in filter', sidebarData)
   if (!normalizedQuery) {
     return sidebarData

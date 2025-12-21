@@ -12,8 +12,9 @@ export async function getVersion(): Promise<VersionResponse> {
         return cachedVersion;
     }
     // console.log("Fetching version from API...");
+    const API_BASE_URL = process.env.API_BASE_URL!;
     try {
-        const res = await fetch("http://localhost:5000/api/get_version", {
+        const res = await fetch(`${API_BASE_URL}/api/get_version`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -51,9 +52,9 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
         return cachedVersionLogo;
     }
     // console.log("Fetching version logo from API...");
-
+    const API_BASE_URL = process.env.API_BASE_URL!;
     try {
-        const res = await fetch("http://localhost:5000/api/get_version_logo", {
+        const res = await fetch(`${API_BASE_URL}/api/get_version_logo`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -93,9 +94,11 @@ let cachedData: ApiResponse | null = null;
 // fetch from API once
 export async function getAppData(): Promise<ApiResponse> {
     if (cachedData) return cachedData;
+    const API_BASE_URL = process.env.API_BASE_URL!;
+    console.log("Fetching sidebar data from API...", API_BASE_URL);
 
     try {
-        const res1 = await fetch("http://localhost:5000/api/get_data");
+        const res1 = await fetch(`${API_BASE_URL}/api/get_data`);
         if (!res1.ok) throw new Error("Failed to fetch API data");
 
         const apiData = await res1.json();
@@ -118,7 +121,7 @@ export async function getAppData(): Promise<ApiResponse> {
                 })),
             }))
 
-        const res2 = await fetch("http://localhost:5000/api/get_data_raw");
+        const res2 = await fetch(`${API_BASE_URL}/api/get_data_raw`);
         if (!res2.ok) throw new Error("Failed to fetch API raw data");
 
         const rawData = await res2.json();
@@ -137,24 +140,24 @@ export async function getAppData(): Promise<ApiResponse> {
         // Convert to array of arrays
         const groupedData: IData[][] = Object.values(grouped)
 
-        const res3 = await fetch("http://localhost:5000/api/get_subcategories");
+        const res3 = await fetch(`${API_BASE_URL}/api/get_subcategories`);
         if (!res3.ok) throw new Error("Failed to fetch subcategory list");
 
         const subcategoryList = await res3.json();
         // console.log("Fetched subcategory list:", subcategoryList);
 
-        const res4 = await fetch("http://localhost:5000/api/get_i18n_ZH");
+        const res4 = await fetch(`${API_BASE_URL}/api/get_i18n_ZH`);
         if (!res4.ok) throw new Error("Failed to fetch i18n data");
 
         const i18nZH = await res4.json();
 
-        const res5 = await fetch("http://localhost:5000/api/get_announcement");
+        const res5 = await fetch(`${API_BASE_URL}/api/get_announcement`);
         if (!res5.ok) throw new Error("Failed to fetch announcement data");
 
         const announcementData = await res5.json();
         const announcement = announcementData.announcement || "";
 
-        const res6 = await fetch("http://localhost:5000/api/get_channel");
+        const res6 = await fetch(`${API_BASE_URL}/api/get_channel`);
         if (!res6.ok) throw new Error("Failed to fetch channel data");
 
         const channelData = await res6.json();

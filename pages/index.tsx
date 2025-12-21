@@ -110,7 +110,6 @@ export default function Home() {
 
   const { sidebarData, announcement, channel } = useGlobal()
   const normalizedAnnouncement = announcement.replace(/\\n/g, '\n');
-  console.log('this is announcement', channel);
 
   useEffect(() => {
     const getStarForkCount = async () => {

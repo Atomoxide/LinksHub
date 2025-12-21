@@ -21,9 +21,11 @@ const CategoryPage = () => {
     ? sidebarData.filter((c) => c.category == category)[0]['subcategory']
     : []
 
+  console.log('subcategory descriptions', subcategories)
+
   const getDesc = (subcatName: string) => {
     for (const desc in categoryDescriptions) {
-      console.log('found description for', desc)
+      // console.log('found description for', desc)
       if (desc == subcatName) {
         return categoryDescriptions[desc]
       }

@@ -37,7 +37,7 @@ function App({ Component, pageProps, version, version_logo, sidebarData, grouped
 }
 
 App.getInitialProps = async () => {
-  if (typeof window !== 'undefined') return { } // Skip on client side
+  // if (typeof window !== 'undefined') return { } // Skip on client side
   const { version } = await getVersion();
   const { version_logo } = await getVersionLogo();
   const { sidebarData, groupedData, subcategoryList, i18nZH, announcement, channel } = await getAppData();
