@@ -3,12 +3,13 @@ import { ISidebar, Category, IData } from "types";
 /////// Version //////////////////
 export type VersionResponse = {
     version: string;
+    last_update: number;
 };
 let cachedVersion: VersionResponse | null = null;
 
 export async function getVersion(): Promise<VersionResponse> {
     // Return cached value if already fetched
-    if (cachedVersion) {
+    if (cachedVersion && (Date.now() - cachedVersion.last_update < 60 * 1000)) {
         return cachedVersion;
     }
     // console.log("Fetching version from API...");
@@ -27,10 +28,10 @@ export async function getVersion(): Promise<VersionResponse> {
         const data: VersionResponse = await res.json();
 
         // Cache result in memory
-        cachedVersion = data;
+        cachedVersion = { version: data.version, last_update: Date.now() };
     } catch (error) {
         console.log("Error fetching version:", error);
-        cachedVersion = { version: "unknown" }; // Fallback value
+        cachedVersion = { version: "unknown", last_update: Date.now() }; // Fallback value
         return cachedVersion;
     }
 
@@ -43,12 +44,13 @@ export async function getVersion(): Promise<VersionResponse> {
 ///////// Version Logo //////////////////
 export type VersionLogoResponse = {
     version_logo: string;
+    last_update: number;
 };
 let cachedVersionLogo: VersionLogoResponse | null = null;
 
 export async function getVersionLogo(): Promise<VersionLogoResponse> {
     // Return cached value if already fetched
-    if (cachedVersionLogo) {
+    if (cachedVersionLogo && (Date.now() - cachedVersionLogo.last_update < 60 * 1000)) {
         return cachedVersionLogo;
     }
     // console.log("Fetching version logo from API...");
@@ -68,10 +70,10 @@ export async function getVersionLogo(): Promise<VersionLogoResponse> {
         const data: VersionLogoResponse = await res.json();
 
         // Cache result in memory
-        cachedVersionLogo = data;
+        cachedVersionLogo = { version_logo: data.version_logo, last_update: Date.now() };
     } catch (error) {
         console.log("Error fetching version logo:", error);
-        cachedVersionLogo = { version_logo: "" }; // Fallback value
+        cachedVersionLogo = { version_logo: "", last_update: Date.now() }; // Fallback value
         return cachedVersionLogo;
     }
 
@@ -87,13 +89,14 @@ interface ApiResponse {
     announcement: string;
     channel: string;
     // add other cached data if needed
+    last_update: number;
 }
 
 let cachedData: ApiResponse | null = null;
 
 // fetch from API once
 export async function getAppData(): Promise<ApiResponse> {
-    if (cachedData) return cachedData;
+    if (cachedData && (Date.now() - cachedData.last_update < 60 * 1000)) return cachedData;
     const API_BASE_URL = process.env.API_BASE_URL!;
     console.log("Fetching sidebar data from API...", API_BASE_URL);
 
@@ -163,10 +166,10 @@ export async function getAppData(): Promise<ApiResponse> {
         const channelData = await res6.json();
         const channel = channelData.channels || "";
 
-        cachedData = { sidebarData, groupedData, subcategoryList, i18nZH, announcement, channel };
+        cachedData = { sidebarData: sidebarData, groupedData: groupedData, subcategoryList: subcategoryList, i18nZH: i18nZH, announcement: announcement, channel: channel, last_update: Date.now() };
     } catch (error) {
         console.log("Error fetching sidebar data:", error);
-        cachedData = { sidebarData: [], groupedData: [], subcategoryList: {}, i18nZH: {}, announcement: "", channel: "" }; // Fallback value
+        cachedData = { sidebarData: [], groupedData: [], subcategoryList: {}, i18nZH: {}, announcement: "", channel: "", last_update: Date.now() }; // Fallback value
         return cachedData;
     }
     return cachedData;

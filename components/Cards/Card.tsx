@@ -16,6 +16,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
   const { name, description, url, subcategory } = data
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const [isOverflow, setIsOverflow] = useState(false)
+  const websiteRegex = /^(https?:\/\/)/
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|bilibili\.com|bilivideo\.com)\/.+$/
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
         </div>
         <footer className="grid grid-cols-2 gap-x-4 md:grid-cols-1 lg:grid-cols-2">
         <CopyToClipboard url={url} />
-          <a
+          {websiteRegex.test(url) ? (<a
             onClick={(e) => e.stopPropagation()}
             href={url}
             target="_blank"
@@ -75,7 +76,7 @@ export const Card: FC<CardProps> = ({ data, onClick }) => {
             ) : (
               <HiOutlineExternalLink size="1.3em" />
             )}
-          </a>
+          </a>) : null}
         </footer>
       </div>
     </article>
